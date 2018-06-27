@@ -29,7 +29,7 @@ from traitlets.config import Application
 from . import __version__
 from .buildpacks import (
     PythonBuildPack, DockerBuildPack, LegacyBinderDockerBuildPack,
-    CondaBuildPack, JuliaBuildPack, BaseImage,
+    CondaBuildPack, HaskellBuildPack, JuliaBuildPack, BaseImage,
     RBuildPack
 )
 from .utils import (
@@ -66,6 +66,7 @@ class Repo2Docker(Application):
             LegacyBinderDockerBuildPack,
             DockerBuildPack,
             JuliaBuildPack,
+            HaskellBuildPack,
             RBuildPack,
             CondaBuildPack,
             PythonBuildPack,
@@ -103,10 +104,10 @@ class Repo2Docker(Application):
 
         Use a key-value pair, with the key being the volume source &
         value being the destination volume.
-        
-        Both source and destination can be relative. Source is resolved 
+
+        Both source and destination can be relative. Source is resolved
         relative to the current working directory on the host, and
-        destination is resolved relative to the working directory of the 
+        destination is resolved relative to the working directory of the
         image - ($HOME by default)
         """,
         config=True
