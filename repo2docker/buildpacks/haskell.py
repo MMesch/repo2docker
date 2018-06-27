@@ -91,3 +91,6 @@ class HaskellBuildPack(PythonBuildPack):
             ),
         ]
         return assemble_scripts
+
+    def get_default_command(self):
+        return ["stack", "exec", "--", "jupyter", "notebook", "--ip", "0.0.0.0"]

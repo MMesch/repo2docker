@@ -118,7 +118,7 @@ RUN ./{{ s }}
 {% endif -%}
 
 # Specify the default command to run
-CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
+CMD {{ command }} 
 
 {% if appendix -%}
 # Appendix:
@@ -279,6 +279,9 @@ class BuildPack:
         """
         return []
 
+    def get_default_command(self):
+        return ["jupyter", "notebook", "--ip", "0.0.0.0"]
+
     def binder_path(self, path):
         """Locate a file"""
         if os.path.exists('binder'):
@@ -326,6 +329,7 @@ class BuildPack:
             base_packages=sorted(self.get_base_packages()),
             post_build_scripts=self.get_post_build_scripts(),
             appendix=self.appendix,
+            command=self.get_default_command(),
         )
 
     def build(self, image_spec, memory_limit, build_args):
